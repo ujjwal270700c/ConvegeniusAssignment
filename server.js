@@ -6,15 +6,7 @@ const {Telegraf} = require('telegraf');
 
 const bot = new Telegraf(process.env.Token);
 
-bot.on(/\/start /, msg => {
-    const chatId = msg.chat.id;
-    const user_id = msg.from.id;
-    const name = msg.from.name;
-    const last_name = msg.from.last_name;
-    const username = msg.from.user_name;
-    user_data = [chatId, first_name, last_name, username];
-    console.log(user_data);
-})
+
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
 
@@ -68,6 +60,8 @@ bot.action('no', ctx => {
     bot.telegram.sendMessage(ctx.chat.id, 'Happy to know have a good day')
 
 })
+
+
 const requestPhoneKeyboard = {
     "reply_markup": {
         "one_time_keyboard": true,
@@ -86,7 +80,18 @@ const requestPhoneKeyboard = {
 bot.action('001', ctx => {
     bot.telegram.sendMessage(ctx.chat.id, 'take second dose as soon as possible', {
     })
-
+    bot.telegram.sendMessage(ctx.chat.id, 'Do you have fever or any infaction ?', {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: 'Yes', callback_data: 'yes' },
+                ],
+                [
+                    { text: 'No', callback_data: 'no' },
+                ]
+            ]
+        }
+    })
 })
 bot.action('002', ctx => {
     bot.telegram.sendMessage(ctx.chat.id, 'Good happy to hear that.', {
